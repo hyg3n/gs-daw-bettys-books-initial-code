@@ -4,6 +4,15 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
+const redirectLogin = (req, res, next) => {
+  if (!req.session.userId ) {
+    res.redirect('/users/login') // redirect to the login page
+  } else { 
+      next (); // move to the next middleware function
+  } 
+}
+
+
 router.get("/register", function (req, res, next) {
   res.render("register.ejs");
 });
@@ -39,6 +48,8 @@ router.post('/loggedin', function (req, res, next) {
         
         if (comparisonResult === true) {
           // If the passwords match, login is successful
+          // Save user session here, when login is successful
+          req.session.userId = req.body.username;
           res.send("Login successful! Welcome back, " + username + ".");
         } else {
           // If the passwords do not match
@@ -87,7 +98,7 @@ router.post('/login', function(req, res, next) {
   });
 });
 
-router.get('/listusers', function(req, res, next) {
+router.get('/listusers', redirectLogin, function(req, res, next) {
     let sqlquery = "SELECT username, first_name, last_name, email FROM users"; // Exclude hashedPassword
     // Execute SQL query
     db.query(sqlquery, (err, result) => {
@@ -140,4 +151,4 @@ router.post("/registered", function (req, res, next) {
 });
 
 // Export the router object so index.js can access it
-module.exports = router;
+module.exports = { router:router, redirectLogin };
