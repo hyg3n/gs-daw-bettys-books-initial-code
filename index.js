@@ -2,6 +2,12 @@
 var express = require ('express')
 var ejs = require('ejs')
 
+// Import validator
+var validator = require ('express-validator');
+
+// Import sanitizer
+const expressSanitizer = require('express-sanitizer');
+
 //Import mysql module
 var mysql = require('mysql2')
 
@@ -14,6 +20,9 @@ const port = 8000
 
 // Tell Express that we want to use EJS as the templating engine
 app.set('view engine', 'ejs')
+
+// Create an input sanitizer
+app.use(expressSanitizer());
 
 // Set up the body parser 
 app.use(express.urlencoded({ extended: true }))
