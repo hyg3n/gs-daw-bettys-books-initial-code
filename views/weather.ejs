@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather in <%= city %></title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .weather-info {
+      display: inline-block;
+      padding: 15px;
+      background: #e3eaf5;
+      border-radius: 8px;
+      margin-top: 20px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .weather-info p {
+      font-size: 1.2em;
+      line-height: 1.5;
+      margin: 5px 0;
+    }
+    .temperature {
+      font-size: 2em;
+      color: #e74c3c;
+    }
+    .description {
+      font-style: italic;
+      color: #3498db;
+    }
+  </style>
+</head>
+<body>
+  <h1>Weather in <%= city %></h1>
+  <div class="weather-info">
+    <p class="temperature"><%= temp %>°C</p>
+    <p class="description"><%= description %></p>
+    <p>Humidity: <%= humidity %>%</p>
+    <p>Wind: <%= windSpeed %> m/s at <%= windDeg %>°</p>
+  </div>
+</body>
+</html>
